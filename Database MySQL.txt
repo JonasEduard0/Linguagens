@@ -1,0 +1,103 @@
+				Database com MySQL
+Cada linha representa uma entrada no banco de dados, cada coluna um tipo de dado.
+Comentário de uma linha: -- bla | Comentário de várias linhas: /* bla */
+Comandos sempre em maiúsculo para se diferenciar das especificações.
+Todo local q guarda informações chama Tabelas(Tables).
+Sempre termina em ;
+
+		Operadores Lógicos
+| = | Igual ;  | <> | Diferente ;  | and | e ;  | or | ou. Os outro são iguais aos do Python
+
+
+		SELECT e FROM
+Seleciona(SELECT) uma Coluna ou mais De(FROM) uma Tabela. Com SELECT * vc seleciona todas colunas.
+| SELECT nomecoluna, nomecoluna2
+   FROM tabela; |
+
+É possível filtrar os resultados:
+| SELECT informacaoespecifica
+   FROM tabela; |
+
+
+		NOT
+Usado antes de comandos para indicar o contrário.
+| SELECT *
+   FROM pessoa.nome
+   WHERE Letra NOT IN (A,B,C) |
+
+
+		DISTINCT
+Usado quando quer omitir dados duplicados de uma tabela. Pode ser usado com outros comandos
+| SELECT DISTINCT nomecoluna, nomecoluna2
+   FROM tabela; |
+
+
+		WHERE
+Extrai apenas alguns dados de uma tabela com uma condição. Pode usar operadores lógicos.
+| SELECT *
+   FROM person.person
+   WHERE LastName = 'Martins' and FirstName = Ana or FirstName = Anna; |
+
+	BETWEEN
+BETWEEN usado para encontrar um valor entre um valor mínimo e um máximo. Usado junto com WHERE.
+| SELECT produto
+  FROM loja
+  WHERE preco BETWEEN 1000 AND 1500;  |
+
+	IN
+Te passa todas informações da ficha cadastrada q tiverem o valor específico da coluna especificada. Usado com WHERE.
+| SELECT *
+   FROM pessoa.nome
+   WHERE Letra IN (A,B,C); |
+
+
+		COUNT
+Retorna quantas colunas de nome 'title' há cadastrados na tabela person.person .
+| SELECT COUNT(title)
+   FROM person.Person; |
+
+
+		TOP
+Seleciona apenas a quantidade de linhas exigidas da coluna exigida da tabela escolhida.
+| SELECT TOP 10 *
+   FROM tabela.tabela; |
+
+
+		ORDER BY
+Ordena os resultados por uma coluna de forma crescente(asc) ou decrescente(desc).
+| SELECT coluna, coluna2
+  FROM tabela.tabela
+  ORDER BY coluna asc, coluna2 desc; |
+
+
+            Banco de dados DDL em SQL
+Data Definition Language(Linguagem de definição de dados)
+SQL(Structured Query Language): Linguagem de consulta estruturada
+
+
+	Tipos de dados
+INTEGER OU INT: Inteiros
+FLOAT OU REAL: Quebrados
+DECIMAL(x,y): Quebrado mas de precisão fixa, pode ter x casas inteiras e y quebradas
+CHAR: Sequencia de caracteres de comprimento fixo
+VARCHAR: Sequencia de caracteres de comprimento variavel
+TEXT: Sequencia de caracteres de comprimento variavel sem restriçao de tamanho
+DATE: Representa uma data
+TIME: Representa um horário
+DATETIME ou TIMESTAMP: Combinação de data e hora
+BOOLEAN: Valores como TRUE ou FALSE
+
+
+	Regras
+Toda table em sql deve ter uma primary key(chave primária), algo que identifica apenas aquela tabela
+Sempre terminar com ENGINE = InnoDB
+
+
+
+	CREATE
+| CREATE DATABASE `database`() | Cria uma database
+| CREATE TABLE `nomedatabase`.`nomedatabela`(coluna1 tipodedado1, coluna2 tipodedado2) | Cria uma tabela na database
+
+
+	INSERT
+| INSERT INTO `database`.`tabela`(`coluna1`, `coluna2`) VALUES(NULL, 'Rua 15') |

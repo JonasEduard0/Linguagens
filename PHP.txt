@@ -1,0 +1,121 @@
+				PHP
+Usado em conjunto com HTML, chama o PHP dentro de 'body'.
+/**/ Comentário de múltiplas linhas. // Comentário de uma linha.
+; no final de comandos.
+
+| phpinfo(); | Mostra as informações do servidor.
+| echo"<br>" | Salta linha.
+
+		Estrutura
+| <body><?php 
+      código;
+      ?></body> |
+
+
+		Comandos importantes
+| var_dump($variavel) | Mostra o tipo e valor da variável.
+
+
+		Echo/Print
+| echo "Olá, mundo!"; | Imprime na tela a frase. Também pode ser imprimido com 'print'.
+
+| $nome = Jonas
+   echo "Meu nome é $nome." | É assim que se declara uma variável e imprime ela.
+
+
+		Date
+Manipular datas e horários.
+| date_default_timezone_set("America/Sao_Paulo"); | Define como defalt o horário do Brasil, São Paulo.
+
+| echo "Hoje é dia ". date("d/M/Y"); | D = dia do mês, d = dia da semana, M = mês, Y = ano.
+
+| echo " e são ". date("G:i:s T"); | G = hora, i = minuto, s = segundo T = Timezone q o tempo é medido.
+
+
+		Variável e constante
+Variável pode mudar de valor, já a constante não pode e é imprimida de jeito diferente.
+$nome = 'jonas';
+const SOBRENOME = 'eduardo';
+echo "Olá $nome que tem o sobrenome " .SOBRENOME;
+
+
+		Array
+É como uma variável q guarda vários valores. Possui Características iguais á lista do Python.
+$carros=array("BMW","Hilux");
+
+| print_r($carros); | Printa informações como os valores e a posição da array.
+
+| echo $carros[1]; | Printa a posição especificada da array.
+
+| foreach($carros as $valor){
+        echo $valor. "<br>"}; | Printa cada valor da array.
+
+| $carros[10]="Toyota"; | Adiciona o valor na posição especificada.
+
+| $pessoa=array("nome" => "Vanessa", "idade" => 18); |
+
+| $pessoa["sexo"] = "Masculino"; | Adiciona uma valor para esse tipo de lista.
+
+
+		Estrutura de repetição.
+	While
+| $contador = 1;
+    while ($contador <= 10) {
+        echo "Cotador vale $contador. ";
+        $contador++;}; |
+
+| $c = 0;
+    while (true) {
+        if ($c <= 5) {
+            echo $c,"<br>";
+            break;};
+        $c++;}; | 
+
+		For
+Outra estrutura de repetição.
+| for ($i=0; $i <= 10; $i++) { 
+        echo "O contador é $i. ";}; | 
+
+| $n = 9;
+    for ($i=0; $i <= 10; $i++) {
+        echo "$n*$i=" .($n*$i). ". ";}; |
+
+
+		Switch Case
+Analisa várias possibilidades e executa uma.
+| $letra = 'a'; 
+switch (strtoupper($letra)) {
+    case 'A':
+        echo 'Esta letra e uma vogal';
+        break;
+    default:
+        echo 'É uma consoante';
+        break;} |
+
+
+		Tipos Primitivos
+Escalares: string('oi'), int(01), float(10.5) e boolean(true).
+Compostos: array e object.
+Especiais: null, resource, callabe, mixed.
+
+		Manipulação de string
+	Double Quoted
+Usa a aspas duplas"". Interpreta o conteúdo que está dentro, se tem um código.
+
+	Single Quoted
+Usa aspas simples''. Não interpreta oque está dentro, printa do jeito que está.
+
+	Heredoc
+Printa da forma que estiver em echo.
+| echo <<< FRASE Olá
+	Jonas			tudo bem? FRASE; |
+
+
+		Formulário
+Você recebe os dados de um formulário em HTML de outro site e manipula os dados
+| var_dump(REQUEST) |
+
+
+        Sessão
+
+| session_start() |
