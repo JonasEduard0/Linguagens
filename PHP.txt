@@ -14,6 +14,7 @@ Usado em conjunto com HTML, chama o PHP dentro de 'body'.
 
 		Comandos importantes
 | var_dump($variavel) | Mostra o tipo e valor da variável.
+| </pre> | Organiza arrays.
 
 
 		Echo/Print
@@ -112,10 +113,23 @@ Printa da forma que estiver em echo.
 
 
 		Formulário
-Você recebe os dados de um formulário em HTML de outro site e manipula os dados
+Você recebe os dados de um formulário em HTML de outro site e manipula os dados.
 | var_dump(REQUEST) |
 
 
         Sessão
-
 | session_start() |
+
+
+	Superglobais
+| $_GET | Mostra dados na url.
+| $_POST | Mostra na página pra desenvolvedor.
+| $_REQUEST | Ambos.
+| $_FILES | Um array associativo de items enviado através do script atual pelo método HTTP POST.
+| $_SESSION["teste"] = "Teste" |
+| $_ENV | O ambiente do computador, mostra username, caminhos, etc.
+| $_SERVER | Mostra servidor, ip, port, adm, etc.
+| $GLOBALS | Mostra todos outros superglobais.
+
+| setcookie("dia","segunda",time() + 3600)
+  $_COOKIE | var.   valor   tempo atual+segundos (tempo do cookie)
