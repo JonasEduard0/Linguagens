@@ -1,38 +1,36 @@
                                                 Python
                       Símbolos
-string      | palavras
-int           | inteiro
-float        | quebrado
-bool        | true , false
-and         | todos têm q ser true
-or           | um tem que ser true
-!=           | diferente
-==          | idêntico
-<            | menor
->            | maior
-=            | recebe
-<=          | menor ou igual
->=          | maior ou igual
-%           | pega o resto de uma divisão
-#            | comentário no código
-**          | potência
-+=          | a = a + b  \  a+= b
-in	    | se o numero ou letra a direita estiver contido na direita entao é true
+string  | palavras
+int     | inteiro
+float   | quebrado
+bool    | true , false
+and     | todos têm q ser true
+or      | um tem que ser true
+!=      | diferente
+==      | idêntico
+<       | menor
+>       | maior
+=       | recebe
+<=      | menor ou igual
+>=      | maior ou igual
+%       | pega o resto de uma divisão
+#       | comentário no código
+**      | potência
++=      | a = a + b  \  a+= b
+in      | se o numero ou letra a direita estiver contido na direita entao é true
 
-Todo método tem parênteses e pode ter . no início. Ex: .metodo()
 
                                       Variáveis
-
-type(variavel)                                            | O tipo(type) da variavel(variavel), se é int, string, etc
+type(variavel)                            | O tipo(type) da variavel(variavel), se é int, string, etc
 
 variavel = int(input("Digite o número:")) | Pede para digitar(input) um inteiro(int) e guarda na variável(variavel)
                                                                   |Pode ser feito com : int,float,bool,string
                                
 
                                        Prints
-print("""Eu              |
-estou                       |
-programando""")    | Printa respeitando a quebra de linha
+print("""Eu              
+estou                       
+programando""")    	 | Printa respeitando a quebra de linha
 
 print("\n")              | Salta linha
 
