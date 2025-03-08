@@ -1,0 +1,99 @@
+				C++
+Mouse 2 em uma variável > Renomear | Renomeia uma var e substitui em todos seus usos.
+Há o comentário de uma linha(//) ou o de várias linhas(/*...*/).
+
+
+	Tipos de variáveis
+char 	     | Um único caractere, entre aspas simples ''.
+string	     | Texto, entre aspas duplas "".
+bool 	     | Retorna 1 para true(verdadeiro) e 0 para false.
+float/double | Números quebrados com casas decimais. Double armazena mais casas. 
+void() 	     | Não possui tipo nem retornará valor algum.
+
+
+	Operadores lógicos
+
+!   | Retorna o contrario do verdadeiro. Se true, retorna false.
+&&  | Todas afirmações têm que ser true para retornar true.
+||  | Se um dos valores for true, todo código será considerado true.
+
+
+	Estrutura do código
+
+#include <iostream>	     		 | 'include' é uma diretiva de pré-processamento que inclui um código ao meu, quase uma biblioteca.
+#include <locale.h>	     		 | 
+
+int main(){		     		 | Função principal onde a maioria do código vai dentro.
+    	setlocale(LC_ALL, "portuguese"); | Permite o uso de acentuações da língua portuguesa.
+	using namespace std; 	 	 | Tira a necessidade de colocar 'std::' no código, mas pode conflitar em grandes projetos.
+	...
+system("PAUSE")return 0;}    	 	 | Retorna para o S.O., 0 indica que tudo está correto, sempre no fim do código.
+
+
+	C in e C out
+
+| std::count <<"txt";
+Printa o texto/código especificado. Sai uma informação. Sinal de menor <.
+
+| int numero1; 					  //Cria a(s) variável.
+  std::cout << "Digite o(s) número(s): "; 	  //Pede um número ao usuário.
+  std::cin >> numero1; 			          //A variável recebe o valor com cin, sinal de maior >.
+  std::cout << "Numero = " << numero1 << endl; |  //Printa "Numero = (var)".
+
+
+	Variáveis e Constantes literais
+Variáveis, constantes e tipos de variáveis são chamados de literais e se declaram com (), =, ou até {}.
+Valores escalares são vetores, enumerações e etc, se declaram com {}.
+
+| int variável(10); const string constante = 'texto fixo' |
+Variável possibilita a mudança de seu valor, constante possui valor fixo.
+
+
+	Formatação
+
+| int num{10}; std::string Texto{"Texto string"};
+  std::printf("Valor de num = %d, valor de Texto = %s", num, Texto.c_str()); |
+Substitui %d pela variavel int após a vírgula. Funciona com os tipos:
+int -> %d, float -> %f, double -> %lf, char -> %c, string -> %s.
+Observe q string é considerado classe, então, na sua referência no printf, deve colocar .c_str().
+
+
+	Comandos importantes
+
+| std::endl; | "\n"   | Quebra de linha. endl esvazia o buffer de saída quando chamado e tem desempenho pior.
+
+| std::flush;	      | Se utilizado o "\n" ao invés do endl, é bom utilizá-lo para esvazia o buffer de saída.
+
+| &var 		      | Endereço hexadecimal que a variável ocupa.
+
+| sizeof(var) 	      | Tamanho que a variável ocupa.
+
+| system("...");      | Chama o shell do Windows e digita o código de dentro. pause, dir, color, etc.
+
+| system(“color XX”); | 
+Altera cor de fundo e cor da letra. Ex.: console preto e letra verde: system("COLOR 0A");
+Cores: 0 -> preto, 1->azul, 2 -> verde, 3 -> verde-água, 4 -> vermelho, 5 -> roxo, 6 -> amarelo, 7 -> branco, 
+8 -> cinza, 9 -> azul-claro, A -> verde, B -> verde-água, C -> vermelho, D -> lilás, E -> amarelo, F -> branco.
+
+| typedef tipodado apelido; |
+Cria um apelido para um tipo de dado. Ex: typedef int inteiro.
+
+
+	Incremento e decremento 
+
+| int n1{10}, n2{20};
+  n1 = n2++; |
+n1 recebe o valor 20, após isso, n2 acrescenta(++) ou diminui(--) 1 no valor, virando 21 ou 19. Incremento/decremento pós-fixado.
+
+| n1 = --n2; |
+n2 acrescenta(++) ou diminui(--) 1 no valor, virando 21 ou 19, depois n1 recebe o valor novo de n2. Incremento/decremento pré-fixado.
+
+
+	If statement / Estrutura condicional
+
+ if (nome == "Jonas"){	     | Estrutura condicional simples.
+    cout("Meu nome");}       | Se a condição for true, o bloco é executado.	
+ elif (nome == "Eduardo"){   | Estrutura condicional aninhada. Pode ter quantos elif quiser.
+    cout("Sobrenome");}      | Ou se esta for true, será executada.
+ else{                       | Estrutura condicional composta .
+    cout("Não é meu nome")}  | Senão, este será executado.
