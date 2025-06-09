@@ -223,6 +223,13 @@ Com a diretiva <vector>, é possível criar arrays com tamanho alterável.
   vetordinamico.push_back(4);		| Adiciona o número 4 á array.
 
 
+	Recursividade
+Uma alternativa para laços, consiste em uma função chamar ela mesma 
+| int soma(int  n){
+		if(n == 1){
+			return 1;}
+		else{
+			return n + soma(n-1);}} |
 
 	Programação Orientada a Objeto(POO)
 Ao contrário da Programação Estruturada, gira em torno de classes e não funções, baseado na análise bottom-up e não na top-down.
@@ -248,7 +255,6 @@ Métodos(Funções): os comportamentos do objeto, como ele funciona.
 | (*casadepraia).numquarto | Ponteiro que também pode ser escrito: casadepraia->Setnumquarto
 
 Herança: transmissão de recursos de uma superclasse/classe base pra classe filha/subclasse.
-
 
 
 	Struct(Estrutura)
