@@ -18,19 +18,20 @@ void() 	     | Não possui tipo nem retornará valor algum.
 
 	Operadores lógicos
 !   | Retorna o contrario do verdadeiro. Se true, retorna false.
-&&  | Todas afirmações têm que ser true para retornar true.
-||  | Se um dos valores for true, todo código será considerado true.
+&&  | Todas afirmações têm que ser true para retornar true, 'e'.
+||  | Se um dos valores for true, todo código será considerado true, 'ou'.
 
 
 	Estrutura do código
 
-#include <...>	     		 
+#include <iostream>			 | inclua as bibliotecas aqui.
+using namespace std; 	 	 	 | Tira a necessidade de colocar 'std::' no código, mas pode conflitar em grandes projetos.
+...(struct, funções, classes,globals)
 					 
-int main(){		     		 | Função principal onde a maioria do código vai dentro.
-    	setlocale(LC_ALL, "portuguese"); | Permite o uso de acentuações da língua portuguesa com o <locale.h
-	using namespace std; 	 	 | Tira a necessidade de colocar 'std::' no código, mas pode conflitar em grandes projetos.
+int main(){system("cls");		 | Função principal onde a maioria do código vai dentro. 'cls' limpa terminal.
+    	setlocale(LC_ALL, "portuguese"); | Permite o uso de acentuações da língua portuguesa com o <locale.h>
 	...
-system("PAUSE")return 0;}    	 	 | Retorna para o S.O., 0 indica que tudo está correto, sempre no fim do código.
+return 0;}    	 	 		 | Retorna para o S.O., 0 indica que tudo está correto, sempre no fim do código.
 
 
 	Includes
@@ -169,7 +170,7 @@ for (auto dez : foreache){		| auto=detecta o tipo.
     cout << "A soma da função é: " << somaumnumero(somado1, somado2);...} |
 Funções servem para não escrever o mesmo código várias vezes, chamamos a função sempre q precisarmos.
 
-| void vazio(){} | Uma função sem tipo.
+| void vazio(){} | Uma função sem tipo, quando não retorna valor, apenas preenche.
 
 
 	Ponteiro e Aritmética de ponteiros
@@ -222,16 +223,18 @@ Com a diretiva <vector>, é possível criar arrays com tamanho alterável.
 | vector<float>vetordinamico = {1,2,3};	| Cria uma array float e já atribui valores.
   vetordinamico.push_back(4);		| Adiciona o número 4 á array.
 
+| int* numeros = new int[tamanho]; | Ou cria-se dessa forma. 
+
 
 	Recursividade
 Uma alternativa para laços, consiste em uma função chamar ela mesma 
 | int soma(int  n){
-		if(n == 1){
-			return 1;}
-		else{
-			return n + soma(n-1);}} |
+	if(n == 1){
+	    return 1;}
+	else{
+	    return n + soma(n-1);}} |
 
-	Programação Orientada a Objeto(POO)
+		Programação Orientada a Objeto(POO)
 Ao contrário da Programação Estruturada, gira em torno de classes e não funções, baseado na análise bottom-up e não na top-down.
 
 Classe: é o molde que serve de base para criar/instanciar objetos. Ex: receita ou planta de construção.
@@ -257,15 +260,30 @@ Métodos(Funções): os comportamentos do objeto, como ele funciona.
 Herança: transmissão de recursos de uma superclasse/classe base pra classe filha/subclasse.
 
 
-	Struct(Estrutura)
+		Struct(Estrutura)
 Parecido com classes, mas por padrão as variáveis são public. É um modelo de criação de variáveis que não ocupa espaço na memória. Declara fora de main() e utiliza dentro.
-
 | struct Data{
-     int dia;
-     int mes;
-     int ano;};...
+     int dia, mes;
+     float ano;};...
+
   Data agenda;
   agenda.dia = 22;
   agenda.mes = 07;
   agenda.ano = 2013;
   cout << "Dia: " << agenda.dia; |
+
+	Método
+Consiste em uma função dentro de uma struct.
+| struct ContaBanco{
+    float saldo = 0;
+    int numeroConta = 001;
+    void deposito(){
+        cout << "\nAdicione um valor para o deposito: "; cin >> saldo;}
+    void saque(){
+        float sacar = 0;
+        cout << "Informe o valor do saque: "; cin >> sacar; saldo -= sacar;}}; 
+  int main(){
+     ContaBanco cb;
+     cb.deposito();
+     cb.saque();
+     cout << "Seu saldo e " << cb.saldo;|
