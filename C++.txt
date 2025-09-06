@@ -234,26 +234,33 @@ Uma alternativa para laços, consiste em uma função chamar ela mesma
 	else{
 	    return n + soma(n-1);}} |
 
+
 		Programação Orientada a Objeto(POO)
 Ao contrário da Programação Estruturada, gira em torno de classes e não funções, baseado na análise bottom-up e não na top-down.
 
 Classe: é o molde que serve de base para criar/instanciar objetos. Ex: receita ou planta de construção.
-Objeto: é instanciado/criado a partir da classe. 		   Ex: bolo ou casa construída.
+Objeto: é instanciado/criado a partir da classe. Ex: bolo ou casa construída.
 Atributos(Propriedades): são as variáveis que caracterizam um objeto.
 Métodos(Funções): os comportamentos do objeto, como ele funciona.
 
-| class classecasa{	      | Declara a classe.
-  private:		      | Por padrão, já é private. Diz que só pode ser acessado no código da classe.
-  	int numquarto;	      | Atributos.
-	float tamanho;	      |
-	bool btemsuite;	      |
-  public:		      | Public: permite o código ser usado fora da classe.
-	void mostratamanho(); | Métodos.
-	int obternumquarto(); |
-	bool temsuite();};    |
+| class Pessoa{	          | Declara a classe no .h
+  private:		          | Por padrão, já é private. Diz que só pode ser acessado no código da classe.
+  	int idade;	          | Atributos.
+	string nome;	      
+  public:		          	  | Public: permite o código ser usado fora da classe.
+	Pessoa();			  	  | Construtor: nome=classe, inicializa variáveis
+	void setIdade(int idade); | Métodos. "void setXx" permite atualizar o valor na main.
+	int getIdade();			  | "get" pega o valor e permite printar.
 
-| classecasa casadepraia;			| 'classecasa' pode ser chamado agora de 'casadepraia'
-  cout << "\n" << casadepraia.mostratamanho();  | Para acessar um membro de uma classe, utiliza '.'
+| Pessoa::Pessoa(){						| Antes de main no .cpp
+	nome = ""; idade = 0; sexo = '\0';} | Zera os valores dos atributos.
+  int Pessoa::getIdade(){					| 
+	return this->idade;}				| 
+  void Pessoa::setIdade(int idade){		| "void classe::set" atualiza o valor alterado.
+	return this->idade = idade;} 		| 
+
+  Pessoa p1;							| Cria uma pessoa.
+  p1.setIdade(30);						| Altera o valor pelo "public setX".
 
 | (*casadepraia).numquarto | Ponteiro que também pode ser escrito: casadepraia->Setnumquarto
 
@@ -273,7 +280,7 @@ Parecido com classes, mas por padrão as variáveis são public. É um modelo de
   cout << "Dia: " << agenda.dia; |
 
 	Método
-Consiste em uma função dentro de uma struct.
+Consiste em uma função dentro de uma struct ou class.
 | struct ContaBanco{
     float saldo = 0;
     int numeroConta = 001;
