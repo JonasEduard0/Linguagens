@@ -235,38 +235,6 @@ Uma alternativa para laços, consiste em uma função chamar ela mesma
 	    return n + soma(n-1);}} |
 
 
-		Programação Orientada a Objeto(POO)
-Ao contrário da Programação Estruturada, gira em torno de classes e não funções, baseado na análise bottom-up e não na top-down.
-
-Classe: é o molde que serve de base para criar/instanciar objetos. Ex: receita ou planta de construção.
-Objeto: é instanciado/criado a partir da classe. Ex: bolo ou casa construída.
-Atributos(Propriedades): são as variáveis que caracterizam um objeto.
-Métodos(Funções): os comportamentos do objeto, como ele funciona.
-
-| class Pessoa{	          | Declara a classe no .h
-  private:		          | Por padrão, já é private. Diz que só pode ser acessado no código da classe.
-  	int idade;	          | Atributos.
-	string nome;	      
-  public:		          	  | Public: permite o código ser usado fora da classe.
-	Pessoa();			  	  | Construtor: nome=classe, inicializa variáveis
-	void setIdade(int idade); | Métodos. "void setXx" permite atualizar o valor na main.
-	int getIdade();			  | "get" pega o valor e permite printar.
-
-| Pessoa::Pessoa(){						| Antes de main no .cpp
-	nome = ""; idade = 0; sexo = '\0';} | Zera os valores dos atributos.
-  int Pessoa::getIdade(){					| 
-	return this->idade;}				| 
-  void Pessoa::setIdade(int idade){		| "void classe::set" atualiza o valor alterado.
-	return this->idade = idade;} 		| 
-
-  Pessoa p1;							| Cria uma pessoa.
-  p1.setIdade(30);						| Altera o valor pelo "public setX".
-
-| (*casadepraia).numquarto | Ponteiro que também pode ser escrito: casadepraia->Setnumquarto
-
-Herança: transmissão de recursos de uma superclasse/classe base pra classe filha/subclasse.
-
-
 		Struct(Estrutura)
 Parecido com classes, mas por padrão as variáveis são public. É um modelo de criação de variáveis que não ocupa espaço na memória. Declara fora de main() e utiliza dentro.
 | struct Data{
@@ -294,3 +262,63 @@ Consiste em uma função dentro de uma struct ou class.
      cb.deposito();
      cb.saque();
      cout << "Seu saldo e " << cb.saldo;|
+
+
+		Programação Orientada a Objeto(POO)
+Ao contrário da Programação Estruturada, gira em torno de classes e não funções, baseado na análise bottom-up e não na top-down.
+Herança: transmissão de recursos de uma superclasse/classe base pra classe filha/subclasse.
+
+Classe: é o molde que serve de base para criar/instanciar objetos. Ex: receita ou planta de construção.
+Objeto: é instanciado/criado a partir da classe. Ex: bolo ou casa construída.
+Atributos(Propriedades): são as variáveis que caracterizam um objeto.
+Métodos(Funções): os comportamentos do objeto, como ele funciona.
+
+| class Pessoa{	          	  | Declara a classe no .h
+  private:		          	  | Por padrão, já é private. Diz que só pode ser acessado no código da classe.
+  	int idade;	          	  | Atributos.
+	string nome;	      
+  public:		          	  		  | Permite o código ser usado fora da classe.
+	Pessoa();			  	  		  | Construtor: nome=classe, inicializa variáveis.
+	~Pessoa();				  		  | Destrutor.
+	Pessoa(const Pessoa& outra); 	  | Construtor de cópia,usado pra criar um novo objeto a partir de outro, chamado automaticamente.
+    void copiar(const Pessoa& outro); | Método comum,usado pra copiar dados para um objeto já existente, chamado manualmente.
+
+    void imprimir();  | Imprime dados.
+    void preencher(); | Pede para preencher.
+	
+	void setIdade(int idade); | Métodos. "void setXx" permite atualizar o valor na main.
+	int getIdade();			  | "get" pega o valor e permite printar.
+
+| Pessoa::Pessoa(){									   | Antes de main, no objeto.cpp
+	nome = ""; idade = 0; sexo = '\0';} 			   | Zera os valores dos atributos.
+| Pessoa::~Pessoa() {
+    cout << "O objeto " << nome << " foi destruido.";} | No fim, destrói objetos para evitar leaks.
+
+| Pessoa::Pessoa(const Pessoa &outra) { | 'const' diz que o original não pode ser alterado.
+    idade = outra.idade;				| Pega o valor do objeto e cria outro com o mesmo valor.
+    nome = outra.nome;} 				
+
+| void Pessoa::copiar(const Pessoa &outro) { 
+    idade = outro.idade;	| Pega o valor do objeto e coloca em um ja criado.
+    nome = outro.nome;}		| 
+
+| void Pessoa::imprimir() {
+    cout << "Nome: " << nome << endl;
+    cout << "Idade: " << idade << endl;} | Imprime os atributos.
+
+| void Pessoa::preencher() {
+    cout << "Nome: "; cin >> nome;
+    cout << "Idade: "; cin >> idade;} | 
+
+| Pessoa p1,p3,p4;	| No main.
+    p1.setIdade(25);
+    cout << "Idade: " << p1.getIdade() << endl;
+
+    Pessoa p2(p1);
+    cout << "Idade 2: " << p2.getIdade() << endl;
+
+    p3.preencher();
+    p3.imprimir();
+
+    p4.copiar(p3);
+    p4.imprimir();
