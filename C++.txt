@@ -287,12 +287,15 @@ Métodos(Funções): os comportamentos do objeto, como ele funciona.
     void preencher(); | Pede para preencher.
 	
 	void setIdade(int idade); | Métodos. "void setXx" permite atualizar o valor na main.
-	int getIdade();			  | "get" pega o valor e permite printar.
+	int getIdade();};		  | "get" pega o valor e permite printar.
 
-| Pessoa::Pessoa(){									   | Antes de main, no objeto.cpp
+| Pessoa::Pessoa() {								   | Antes de main, no objeto.cpp
 	nome = ""; idade = 0; sexo = '\0';} 			   | Zera os valores dos atributos.
 | Pessoa::~Pessoa() {
     cout << "O objeto " << nome << " foi destruido.";} | No fim, destrói objetos para evitar leaks.
+
+| void Pessoa::setIdade(idade) { this->idade = idade; } | Define o atributo na main.
+| int Pessoa::getIdade() { return idade; } 				| Printa o atributo.
 
 | Pessoa::Pessoa(const Pessoa &outra) { | 'const' diz que o original não pode ser alterado.
     idade = outra.idade;				| Pega o valor do objeto e cria outro com o mesmo valor.
@@ -302,6 +305,8 @@ Métodos(Funções): os comportamentos do objeto, como ele funciona.
     idade = outro.idade;	| Pega o valor do objeto e coloca em um ja criado.
     nome = outro.nome;}		| 
 
+| void copia(Livros outra); | Necessário para a ListaContigua desta classe.
+
 | void Pessoa::imprimir() {
     cout << "Nome: " << nome << endl;
     cout << "Idade: " << idade << endl;} | Imprime os atributos.
@@ -309,6 +314,9 @@ Métodos(Funções): os comportamentos do objeto, como ele funciona.
 | void Pessoa::preencher() {
     cout << "Nome: "; cin >> nome;
     cout << "Idade: "; cin >> idade;} | 
+
+| void Livros::copia(Livros outra) {   | Para ListaContigua.
+    this->nome = outra.getNome();... } | Copia o atributo do proximo elemento.
 
 | Pessoa p1,p3,p4;	| No main.
     p1.setIdade(25);
@@ -319,6 +327,67 @@ Métodos(Funções): os comportamentos do objeto, como ele funciona.
 
     p3.preencher();
     p3.imprimir();
-
     p4.copiar(p3);
-    p4.imprimir();
+    p4.imprimir(); };
+
+
+	Lista Contígua
+| class ListaContigua {
+    int tam, quant; 	| L.C. deve ter tamanho e quantidade de elementos dentro.
+    Livros *lista;  	| Cria um vetor dinâmico com o nome da classe do objeto a ser inserido.
+public:
+    ListaContigua();
+    ~ListaContigua(); 
+
+    ListaContigua(int tam);   | Construtor de sobrecarga(2º construtor), apenas para inserir o tam na lista.
+
+    void shiftEnd(int index); | Aumenta +1 a posicao dos elementos a partir do index(posicao q quer pôr o elemento).
+    void insert(Livros l, int index); }; | Insere o objeto 'l' e atributos na posicao 'index'.
+
+	void shiftFront(int index); | Sobrescreve o index com o próximo elemento, e diminui a posicao dos proximos -1.
+    void remove(int index); 	| Remove o elemento do index, mas fica lixo.
+    void imprime();
+
+| ListaContigua::ListaContigua() {
+    tam = 0;
+    quant = 0; } |
+
+| ListaContigua::ListaContigua(int tam) {
+    this->tam = tam;				| Recebe o valor de tam do outro construtor.
+    this->quant = 0;
+    this->lista = new Livros[tam];} | Cria uma lista com tamanho tam já definido do outro construtor.
+
+| void ListaContigua::insert(Livros l, int index) { | Objeto 'l' inserido na posicao 'index'.
+    if (quant < tam) {          | Ou seja, se ainda tiver espaco na lista...
+        shiftEnd(index);        | Aumenta +1 a posição a partir do index.
+        lista[index].copia(l);  | Copia 'l' e põe no index.
+        quant++;                | Aumenta um elemento na lista.
+    } else {
+        cout << "Lista cheia";} | Se já estiver cheia.
+
+| void ListaContigua::shiftEnd(int index) { | Percorre do final da lista ao index aumentando +1 a posicao do elemento analisado .
+    for (int i = quant; i >= index; i--) {  | Quando i=index, aumenta a posição de todos, até lá, como está na posição máxima, diminui -1 até o index.
+        lista[i].copia(lista[i-1]);}}       | Copia o que está atrás e é levado a frente.
+
+| void ListaContigua::shiftFront(int index) {
+    for (int i = index; i < quant -1; i++) {   | Procura o index a partir do início da lista.
+        lista[i] = lista[i+1]; } 			   | A partir de index, sobrescreve o elemento atual pelo próximo.
+}
+
+void ListaContigua::remove(int index) { | Remove o elemento do index, deixando vazio.
+    if (quant > 0) {
+        shiftFront(index); 				| Executa shiftFrot para diminuir a posição do próximo elemento, tirando o buraco no meio.
+        quant--;        				| Diminui a quantidade de elementos.
+    } else {
+        cout << "Lista vazia"; } | Se lista vazia.
+}
+
+| void ListaContigua::imprime() {
+    for (int i = 0; i < quant-1; i++) { | Para cada elemento da lista,
+        lista[i].imprimir(); }}         |usa o metodo imprimir da classe Pessoa para imprimir cada um.
+
+| ListaContigua lc(10); | Na main. Cria a lista com 10 posições.
+  Pessoa p;				| Cria um objeto.
+  lc.insert(p,0); 		| Insere o objeto na lista na posição 0.
+  lc.remove(0);			| Remove elemento da posição 0.
+  lc.imprime();			| Imprime a lista.
