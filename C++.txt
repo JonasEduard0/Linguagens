@@ -236,7 +236,7 @@ Uma alternativa para laços, consiste em uma função chamar ela mesma
 
 
 		Struct(Estrutura)
-Parecido com classes, mas por padrão as variáveis são public. É um modelo de criação de variáveis que não ocupa espaço na memória. Declara fora de main() e utiliza dentro.
+Parecido com class, mas por padrão as variáveis são public. Modelo de criação de variáveis que não ocupa espaço na memória.
 | struct Data{
      int dia, mes;
      float ano;};...
@@ -318,6 +318,7 @@ Métodos(Funções): os comportamentos do objeto, como ele funciona.
  void Pessoa::copia(Pessoa outra) {    | Para ListaContigua.
     this->nome = outra.getNome();... } | Copia o atributo do proximo elemento.
 
+
 	Lista Contígua
 | class ListaContigua {
     int tam, quant; 	| L.C. deve ter tamanho e quantidade de elementos dentro.
@@ -338,7 +339,7 @@ public:
 
 	int buscaBinaria(int cpfProcurado); | Em lista ordenada do menor para o maior, divide pela metade e procura.
 
-    int bubbleSort(int cpfProcurado);}; | Um tipo de ordenação, percorre a lista comparando elementos e trocando se estiverem na ordem errada.
+    int bubbleSort(int cpfProcurado);}; | Tipo de ordenação, percorre a lista comparando elementos e trocando se estiverem na ordem errada.
 
  ListaContigua::ListaContigua() {
     tam = 0;
@@ -408,6 +409,243 @@ int ListaContigua::buscaBinaria(int cpfProcurado) {
     return -1;}
 
 
+	Lista Encadeada
+Outra estrutura de armazenar/manipular dados além da contígua. Pelo cliente, saberemos qual mais apropriado.
+Não aloca memoria com espaços sequenciais, aqui cada espaço(nó) está em um local diferente na ram.
+Nao tem tam, so quant(quantos nós) e head(ponteiro que aponta pro primeiro nó).
+Um nó/nodo/espaço é composto por um item q vc armazena e um apontador pro proximo nó.
+
+| class Nodo {
+  private:
+    Pessoa item; | Passa objeto Pessoa pro item dentro do nodo.
+    Nodo* prox;  | Ponteiro prox aponta pro proximo item da lista.
+public:
+    Nodo();
+    Nodo(const Pessoa &p); | Const. copia q recebe um objeto Pessoa.
+    ~Nodo() {};
+
+    Pessoa getItem();         | Retorna oq estiver armazenado.
+    void setItem(Pessoa &p);  | Altera uma Pessoa p.
+    void setProx(Nodo* prox); | Define o próximo nodo.
+    Nodo* getProx();          | Retorna o próximo nodo.
+};
+
+Nodo::Nodo() {
+    prox = NULL;
+}
+
+Nodo::Nodo(const Pessoa &p) {
+    prox = NULL;
+    item = p;    | Copia o objeto Pessoa passado por referência
+}
+
+void Nodo::setProx(Nodo* prox) { | 
+    this->prox = prox;
+}
+
+Nodo* Nodo::getProx() { | 
+    return prox;
+}
+
+Pessoa Nodo::getItem() { | 
+    return item;
+}
+
+void Nodo::setItem(Pessoa &p) { | Copia o objeto Pessoa recebido
+    this->item = p;
+}
+
+class Encadeada { | Estrutura q gerencia os nós.
+private:
+    int quant;    | Quantidade de elementos/espaços da lista.
+    Nodo* head;   | Ponteiro head aponta pro primeiro nó.
+public:
+    Encadeada();
+    ~Encadeada() {};
+
+    void insertE(Pessoa &p); | Insere um novo nó p no início.
+    void removeE();          | Remove o primeiro nó.
+
+    void insertpos(int n, Pessoa &p); | Inserir em uma posição específica.
+    void removepos(int n);            | Remover uma posicao especifica.
+
+    Nodo* getElemento(int n); 		  | Pega endereço do elemento desejado,é a busca da lista encadeada.
+};
+
+Encadeada::Encadeada() {
+    quant = 0;
+    head = NULL; | Zera os atributos pois ainda nenhum nó.
+}
+
+void Encadeada::insertE(Pessoa &p) { //
+    Nodo* novo = new Nodo(); | Cria novo nó.
+    novo->setItem(p);        | Insere p no novo no.   
+    novo->setProx(head);     | O novo nó passa a apontar para o antigo primeiro
+    head = novo;             | head agora aponta pro primeiro e novo nó da lista.
+    quant++;
+}
+
+void Encadeada::removeE() {
+    head = head->getProx(); | Pra remover da lista, basta ninguém apontar pra ele,o 2º nó vira 1º.
+    quant--;
+}
+
+void Encadeada::insertpos(int n, Pessoa &p) {
+    Nodo* novo = new Nodo();
+    novo->setItem(p);
+    Nodo* anterior = this->getElemento(n -1); | Pega a posiçao do nodo anterior.
+    novo->setProx(anterior->getProx());       | O novo no pega o endereço/posicao do proximo.
+    anterior->setProx(novo);                  | O nodo anterior agora tem o endereço do novo.
+    quant++;
+}
+
+void Encadeada::removepos(int n) {
+    Nodo* anterior = this->getElemento(n-1); | Define e pega o nodo anterior do excluido.
+    Nodo* excluido = anterior->getProx();    | Pega o endereço do excluido do prox do anterior.
+    anterior->setProx(excluido->getProx());  | Agora o anterior guarda o endereço do da frente do excluido.
+    quant--;
+}
+
+Nodo* Encadeada::getElemento(int n) { | Retorna endereço do elemento buscado n.
+    Nodo *p = head; 						   | Cria um apontador pro head(q aponta pro 1º).
+    int i = 1;      						   | Conta quntas vezes andou até elemento.
+    while (i <= n-1 && p->getProx() != NULL) { | 1 até o anterior do buscado, pois ele q tem o endereço.
+        p = p->getProx(); | Copia endereço do proximo.
+        i++;
+    } if (i == n) { 	  | Quanto elemento buscado = contador
+        return p;   	  | retorna endereço.
+    } else {
+        return NULL;
+}}
+
+
+	Lista Duplamente encadeada
+Parecido, mas um nodo tem |endereço do anterior|,item,endereço do proximo.
+
+class NodoDuplo {
+    Pessoa item;
+    NodoDuplo* prox;
+    NodoDuplo* ant;  | Agora, aponta tambem pro anterior.
+public:
+    NodoDuplo();
+    NodoDuplo(const Pessoa &p);
+    ~NodoDuplo() {};
+
+    Pessoa getItemD();
+    void setItemD(Pessoa &p);
+    NodoDuplo* getProxD();
+    void setProxD(NodoDuplo* prox);
+    NodoDuplo* getAnt();           | Retorna o nodo anterior.
+    void setAnt(NodoDuplo* ant);   | Define o endereço do anterior.
+};
+
+NodoDuplo::NodoDuplo() {
+    prox = NULL;
+    ant = NULL;
+}
+
+NodoDuplo::NodoDuplo(const Pessoa &p) {
+    prox = NULL;
+    ant = NULL;
+    item = p;
+}
+
+void NodoDuplo::setAnt(NodoDuplo* ant) {
+    this->ant = ant;
+}
+
+NodoDuplo* NodoDuplo::getAnt() {
+    return ant;
+}
+
+void NodoDuplo::setProxD(NodoDuplo* prox) {
+    this->prox = prox;
+}
+
+NodoDuplo* NodoDuplo::getProxD() {
+    return prox;
+}
+
+Pessoa NodoDuplo::getItemD() {
+    return item;
+}
+
+void NodoDuplo::setItemD(Pessoa &p) {
+    this->item = p;
+}
+
+class DuploEncadeada {
+private:
+    int quant;
+    NodoDuplo* head;
+public:
+    DuploEncadeada();
+    ~DuploEncadeada() {};
+
+    void insertD(Pessoa &p);
+    void removeD();
+
+    void insertposD(int n, Pessoa &p);
+    void removeposD(int n);
+
+    NodoDuplo* getElementoD(int n);
+};
+
+DuploEncadeada::DuploEncadeada() {
+    quant = 0;
+    head = NULL;
+}
+
+void DuploEncadeada::insertD(Pessoa &p) {
+    NodoDuplo* novo = new NodoDuplo();
+    novo->setItemD(p);
+    novo->setProxD(head);
+    novo->setAnt(NULL);   	  | Como insere na 1 pos, o ant aponta pro nada.
+    if (quant > 0) {          | Agora, se tiver um nodo, 
+        head->setAnt(novo); }
+    head = novo;
+    quant++;
+}
+
+void DuploEncadeada::removeD() {
+    head = head->getProxD(); | head aponta pro próximo do primeiro, q é o endereço do segundo.
+    head->setAnt(NULL);      | Agora o primeiro da lista q era o segundo aponta pra nada.
+    quant--;                 | Ninguém aponta pro antigo primeiro, entao não existe.
+}
+
+void DuploEncadeada::insertposD(int pos, Pessoa &p) {
+    NodoDuplo* novo = new NodoDuplo();
+    novo->setItemD(p);
+    NodoDuplo* n = this->getElementoD(pos);
+    NodoDuplo* anterior = this->getElementoD(pos-1);
+    novo->setProxD(n);
+    novo->setAnt(anterior);
+    anterior->setProxD(novo);
+    n->setAnt(novo);
+    quant++;
+}
+
+void DuploEncadeada::removeposD(int n) {
+    NodoDuplo* anterior = this->getElementoD(n-1);
+    NodoDuplo* frente = this->getElementoD(n+1);
+    anterior->setProxD(frente);
+    frente->setAnt(anterior);
+    quant--;
+}
+
+NodoDuplo* DuploEncadeada::getElementoD(int n) {
+    NodoDuplo *p = head;
+    int i = 1;
+    while (i <= n-1 && p->getProxD() != NULL) {
+        p = p->getProxD();
+        i++;
+    } if (i == n) {
+        return p;
+    } else {
+        return NULL;
+}}
+
+
 int main() {
     ListaContigua l(9);
     Pessoa p1, p2, p3;
@@ -429,3 +667,5 @@ int main() {
     l.imprime();
     l.bubbleSort(0);
     cout << "O elemento procurado esta na posicao " << l.buscaBinaria(123);}
+
+	
