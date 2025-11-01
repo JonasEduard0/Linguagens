@@ -331,15 +331,16 @@ public:
 
     void shiftEnd(int index); | Aumenta +1 a posicao dos elementos a partir do index(posicao q quer pôr o elemento).
     void insert(Livros l, int index); }; | Insere o objeto 'l' e atributos na posicao 'index'.
-
 	void shiftFront(int index); | Sobrescreve o index com o próximo elemento, e diminui a posicao dos proximos -1.
     void remove(int index); 	| Remove o elemento do index, mas fica lixo.
 
     void imprime();
 
 	int buscaBinaria(int cpfProcurado); | Em lista ordenada do menor para o maior, divide pela metade e procura.
+    int bubbleSort(int cpfProcurado);   | Tipo de ordenação, percorre a lista comparando elementos e trocando se estiverem na ordem errada.
 
-    int bubbleSort(int cpfProcurado);}; | Tipo de ordenação, percorre a lista comparando elementos e trocando se estiverem na ordem errada.
+	int proximocirc(int n);
+	int anteriorcirc(int n); }
 
  ListaContigua::ListaContigua() {
     tam = 0;
@@ -408,6 +409,22 @@ int ListaContigua::buscaBinaria(int cpfProcurado) {
             inicio = meio + 1; }}
     return -1;}
 
+int ListaContigua::proximocirc(int n) {
+    if (n >= 0 && n <= tam-1) {//Nao teria sucessor se fosse contigua comum, return-1.
+        if (n == tam-1) {   //Mas e circular, entao o sucessor do ultimo e o primeiro.
+            return 0;
+        } else{
+            return n+1; }}
+}
+
+int ListaContigua::anteriorcirc(int n) {
+    if (n >= 0 && n <= tam-1) {
+        if (n = 0) {
+            return tam -1;
+        } else{
+            return n-1; }}
+}
+
 
 	Lista Encadeada
 Outra estrutura de armazenar/manipular dados além da contígua. Pelo cliente, saberemos qual mais apropriado.
@@ -470,6 +487,9 @@ public:
     void removepos(int n);            | Remover uma posicao especifica.
 
     Nodo* getElemento(int n); 		  | Pega endereço do elemento desejado,é a busca da lista encadeada.
+
+	Nodo* proximoE(int n);
+	Nodo* anteriorE(int n);
 };
 
 Encadeada::Encadeada() {
@@ -517,6 +537,23 @@ Nodo* Encadeada::getElemento(int n) { | Retorna endereço do elemento buscado n.
     } else {
         return NULL;
 }}
+
+Nodo *Encadeada::proximoE(int n) {
+    if (n <= quant-1) {
+        Nodo* proximo = this->getElemento(n+1);
+        return proximo;
+    } else{
+        return head; }
+}
+
+Nodo* Encadeada::anteriorE(int n) {
+    if (n >= 2) {
+        Nodo* anterior = this->getElemento(n-1);
+        return anterior;
+    } else{
+        Nodo* ultimo = this->getElemento(quant);
+        return ultimo; }
+}
 
 
 	Lista Duplamente encadeada
@@ -589,6 +626,9 @@ public:
     void removeposD(int n);
 
     NodoDuplo* getElementoD(int n);
+	
+	NodoDuplo* proximocircD(int n);
+	NodoDuplo* anteriorcircD(int n);
 };
 
 DuploEncadeada::DuploEncadeada() {
@@ -645,6 +685,16 @@ NodoDuplo* DuploEncadeada::getElementoD(int n) {
         return NULL;
 }}
 
+NodoDuplo* DuploEncadeada::proximocircD(int n) {
+    NodoDuplo* elemento = getElementoD(n);
+    return elemento->getProxD();
+}
+
+NodoDuplo* DuploEncadeada::anteriorcircD(int n) {
+    NodoDuplo* elemento = this->getElementoD(n);
+    return elemento->getAnt();
+}
+
 
 int main() {
     ListaContigua l(9);
@@ -669,3 +719,4 @@ int main() {
     cout << "O elemento procurado esta na posicao " << l.buscaBinaria(123);}
 
 	
+
